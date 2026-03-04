@@ -1,0 +1,59 @@
+#  AQI Simple Reflex Agent 
+
+This project implements a Simple Reflex Agent that monitors air quality
+in real-time.
+
+The system collects environmental data from the World Air Quality Index
+(WAQI) API and calculates the Air Quality Index (AQI) using Indian AQI
+breakpoint formulas inside the program.
+
+Instead of directly displaying AQI from the API, the agent: - Collects
+pollutant values (PM2.5, PM10, NO2) - Calculates AQI using standard
+formulas - Determines air quality category - Identifies the dominant
+pollutant
+
+This ensures that AQI measurement is done by our code logic.
+
+ Agent Architecture-
+
+Environment → Sensor → Rule Engine → Actuator
+  
+Environment----
+
+Real-world air pollution data.
+
+ Sensor-----
+
+API call: https://api.waqi.info/feed/{city}/?token=API_KEY
+
+ Rule Engine-----
+
+Implements the AQI formula:
+
+AQI = ((I_high - I_low) / (C_high - C_low)) \* (C - C_low) + I_low
+
+The highest pollutant sub-index becomes the final AQI.
+
+Actuator
+
+Displays: - Pollutant concentrations - Sub-indices - Final AQI -
+Category - Dominant pollutant
+
+AQI Categories (India Standard)
+
+0--50 → Good
+51--100 → Satisfactory
+101--200 → Moderate
+201--300 → Poor
+301--400 → Very Poor
+401--500 → Severe
+
+
+ How to Run
+
+1.  Install required library: pip install requests
+
+2.  Run the Python file: python aqi_agent.py
+
+3.  Enter city name when prompted.
+
